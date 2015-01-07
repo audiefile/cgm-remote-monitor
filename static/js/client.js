@@ -1492,7 +1492,7 @@
 
     function carbImpact(rawCarbImpact, insulinImpact) {
         var liverSensRatio = 1.0;
-        var liverCarbImpactMax = 1;
+        var liverCarbImpactMax = 0.7;
         var liverCarbImpact = Math.min(liverCarbImpactMax, liverSensRatio*insulinImpact);
         //var liverCarbImpact = liverSensRatio*insulinImpact;
         var netCarbImpact = Math.max(0, rawCarbImpact-liverCarbImpact);
@@ -1564,10 +1564,10 @@
             var minutesleft = (lastDecayedBy-carbTime)/1000/60;
             decayedBy.setMinutes(decayedBy.getMinutes() + Math.max(delay,minutesleft) + treatment.carbs/carbs_min); 
             if(delay > minutesleft) { 
-                initialCarbs = treatment.carbs; 
+                initialCarbs = parseInt(treatment.carbs); 
             }
             else { 
-                initialCarbs = treatment.carbs + minutesleft*carbs_min; 
+                initialCarbs = parseInt(treatment.carbs) + minutesleft*carbs_min; 
             }
             var startDecay = new Date(carbTime);
             startDecay.setMinutes(carbTime.getMinutes() + delay);
